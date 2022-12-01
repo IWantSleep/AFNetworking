@@ -104,6 +104,8 @@ NSString * AFPercentEscapedStringFromString(NSString *string) {
 - (NSString *)URLEncodedStringValue {
     if (!self.value || [self.value isEqual:[NSNull null]]) {
         return AFPercentEscapedStringFromString([self.field description]);
+    } else if(!self.field || [self.field isEqual:[NSNull null]]){
+        return [NSString stringWithFormat:@"%@",self.value];
     } else {
         return [NSString stringWithFormat:@"%@=%@", AFPercentEscapedStringFromString([self.field description]), AFPercentEscapedStringFromString([self.value description])];
     }
@@ -798,7 +800,7 @@ NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
 - (void)appendPartWithHeaders:(NSDictionary *)headers
                          body:(NSData *)body
 {
-    NSParameterAssert(body);
+//    NSParameterAssert(body);
 
     AFHTTPBodyPart *bodyPart = [[AFHTTPBodyPart alloc] init];
     bodyPart.stringEncoding = self.stringEncoding;
